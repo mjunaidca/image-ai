@@ -57,6 +57,7 @@ export const Form = () => {
 
         setLink(data.url);
         openModal(true)
+        setShowSpinner(false);
     };
 
     return (
