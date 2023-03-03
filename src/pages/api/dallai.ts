@@ -23,19 +23,29 @@ export default async function handler(
 
   let sSize: CreateImageRequestSizeEnum | undefined;
 
+  console.log(
+    " Image Size before Passing it to API inside the DallAI File ",
+    size
+  );
+
   switch (size) {
-    case "small":
+    case "256x256":
       sSize = CreateImageRequestSizeEnum["256x256"];
       break;
-    case "medium":
+    case "512x512":
       sSize = CreateImageRequestSizeEnum["512x512"];
       break;
-    case "large":
+    case "1024x1024":
       sSize = CreateImageRequestSizeEnum["1024x1024"];
       break;
     default:
       sSize = CreateImageRequestSizeEnum["256x256"];
   }
+
+  console.log(
+    " Image Size after Passing it to API inside the DallAI File ",
+    sSize
+  );
 
   // const size = req.body.size;
   if (!promptString || undefined) {

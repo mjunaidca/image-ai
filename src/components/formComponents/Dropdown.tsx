@@ -1,4 +1,4 @@
-import DDHeader from "@/src/components/DDHeader";
+import DrowDownHeader from "@/src/components/DDHeader";
 import { DropDownMenueProps as Props } from "@/src/types";
 
 const Dropdown = ({
@@ -12,7 +12,11 @@ const Dropdown = ({
   if (Array.isArray(Options)) {
     return (
       <div>
-        <DDHeader ImagePath={ImagePath} ImageAlt={ImageAlt} Label={Label} />
+        <DrowDownHeader
+          ImagePath={ImagePath}
+          ImageAlt={ImageAlt}
+          Label={Label}
+        />
         <select
           className="block w-full border-2 border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           value={Value}
@@ -32,7 +36,11 @@ const Dropdown = ({
   } else {
     return (
       <div>
-        <DDHeader ImagePath={ImagePath} ImageAlt={ImageAlt} Label={Label} />
+        <DrowDownHeader
+          ImagePath={ImagePath}
+          ImageAlt={ImageAlt}
+          Label={Label}
+        />
         <select
           className="block w-full border-2 border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           value={Value}
