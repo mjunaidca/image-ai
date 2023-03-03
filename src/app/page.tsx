@@ -1,38 +1,18 @@
-'use client'
-
-import Gen from "../pages/api/response";
-import React, { useState } from "react";
-// import styles from './page.module.css';
+import InputForm from "@/src/components/InputForm";
 
 export default function Home() {
-
-  const [searchVal, setSearchVal] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState('');
-
-  async function generateImage(): Promise<any> {
-    setLoading(true);
-    const response = await Gen(searchVal);
-    console.log('response');
-    const data = await response;
-    console.log(data);
-    setImage(data.url);
-    setSearchVal("");
-    setLoading(false);
-  }
-
   return (
-    <>
-      <main>
-        <div>
-          <h1>AI Image Generation with OpenAI</h1>
-          <input value={searchVal} type="text" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchVal(event.target.value)} />
-          <button onClick={() => generateImage()}>{loading ? 'Loading...' : 'Generate image'}</button>
-        </div>
-        {image && <>
-          <img className="image-result" src={image} alt="ai generated" />
-        </>}
-      </main>
-    </>
-  )
+    <main>
+      <div className="flex max-w-screen-2xl  w-full mx-auto flex-col items-center justify-center py-2 min-h-fit  ">
+        <main className="flex flex-1 w-screen flex-col items-center justify-center text-center px-4 mt-6 sm:mt-10">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-9">
+              Generate your next Super Image in seconds
+            </h1>
+            <InputForm />
+          </div>
+        </main>
+      </div>
+    </main>
+  );
 }

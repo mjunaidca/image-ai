@@ -1,8 +1,4 @@
-interface Props {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder: string;
-}
+import { InputFieldProps as Props } from "@/src/types";
 
 const InputField = ({ value, onChange, placeholder }: Props) => (
   <textarea

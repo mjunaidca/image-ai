@@ -1,10 +1,10 @@
-import Header from '../views/Navbar/Header'
-import './globals.css'
+import Header from "../components/NavBar";
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -20,5 +20,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }

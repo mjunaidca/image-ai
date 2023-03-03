@@ -1,9 +1,4 @@
-
-
-interface Props {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  showSpinner: boolean;
-}
+import { GenerateButtonProps as Props } from "@/src/types";
 
 const GenerateButton = ({ handleSubmit, showSpinner }: Props) => {
   return (

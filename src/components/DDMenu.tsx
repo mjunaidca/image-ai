@@ -1,7 +1,9 @@
+import React from "react";
 import DDHeader from "@/src/components/DDHeader";
+
 import { DropDownMenueProps as Props } from "@/src/types";
 
-const Dropdown = ({
+export const DropDownMenue = ({
   ImagePath,
   ImageAlt,
   Label,
@@ -54,5 +56,3 @@ const Dropdown = ({
     );
   }
 };
-
-export default Dropdown;

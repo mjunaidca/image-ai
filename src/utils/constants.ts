@@ -1,4 +1,4 @@
-import { IStyle } from "../types/ImageStyle";
+import { IStyle } from "@/src/types";
 
 // Primary Vibes
 export const imageVibes = [
