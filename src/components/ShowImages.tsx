@@ -9,9 +9,10 @@ interface Props {
   load: boolean;
   link?: string;
   userPrompt?: string;
+  save_id?: string;
 }
 
-const ShowImages = ({ showMod, load, link, userPrompt }: Props) => {
+const ShowImages = ({ showMod, load, link, userPrompt, save_id }: Props) => {
   console.log("Called the ShowImages Component");
 
   const [loading, setLoading] = useState(load);
@@ -19,7 +20,7 @@ const ShowImages = ({ showMod, load, link, userPrompt }: Props) => {
   const [prompt, setPrompt] = useState("");
   const [showModal, setShowModal] = useState(showMod);
 
-  const { data, error } = useSWR("api/imagedb", fetcher);
+  const { data, error } = useSWR(`api/aiimg`, fetcher);
 
   useEffect(() => {
     if (link && userPrompt) {
@@ -28,11 +29,12 @@ const ShowImages = ({ showMod, load, link, userPrompt }: Props) => {
       setLoading(false);
       setShowModal(true);
       console.log("redndering image from direct link");
+      console.log("Fetched Data", data);
     } else if (data) {
       const imageDataArr = [...data.imagedb];
       const inverseOrder = imageDataArr.reverse();
 
-      const url = inverseOrder[0].imageURL[0];
+      const url = inverseOrder[0].original_image_url;
       const userPrompt = inverseOrder[0].prompt;
 
       setImage(url);
@@ -43,7 +45,7 @@ const ShowImages = ({ showMod, load, link, userPrompt }: Props) => {
       console.log("Link: ", link);
       console.log("User Prompt: ", userPrompt);
 
-      console.log("redndering image by fetching data");
+      console.log("rendering image by fetching data");
     }
   }, [data, link, userPrompt]);
 

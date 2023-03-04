@@ -30,27 +30,33 @@ async function ImgGenerator({ prompt, size, callback }: ImgGeneratorProps) {
 
   console.log("Sending Data to the Database");
 
-  // const newImage = {
-  //   prompt,
-  //   url,
-  // };
+  // console.log("Data Saved to Database Successfully");
+  const newImage = {
+    prompt: prompt,
+    original_image_url: data.url,
+    date_created: new Date(),
+  };
 
-  // const databaseResponse = await fetch(`api/imagedb`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(newImage),
-  // });
+  const databaseResponse = await fetch(`api/aiimg`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newImage),
+  });
 
-  // const databaseData = await databaseResponse.json();
-  // console.log("Received Response from Database", databaseData);
-  // console.log("Data Saved to Data Base Successfully");
+  const databaseData = await databaseResponse.json();
+
+  // console.log("Received ID from Database", databaseData.insertedId);
+
+  console.log("Data Saved to Data Base Successfully");
 
   console.log("calling callback function ");
 
   callback();
-  return data;
+
+  // return data;
+  return { orgUrl: data.url, id: databaseData.insertedId };
 }
 
 export default ImgGenerator;

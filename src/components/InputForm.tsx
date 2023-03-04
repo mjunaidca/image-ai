@@ -4,7 +4,7 @@ import {
   IMAGE_STYLE,
   ARTISTS_STYLE,
   MODIFIERS_STYLE,
-} from "@/src/utils/constants";
+} from "@/src/lib/utils/constants";
 import {
   InputField,
   SizeSelector,
@@ -29,6 +29,7 @@ const InputForm = () => {
   const [link, setLink] = useState("");
   const [modal, openModal] = useState(false);
   const closeModal = () => openModal(false);
+  const [saveId, setSaveId] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,22 +45,23 @@ const InputForm = () => {
 
     const handleImage = () => {
       console.log("Handle Function Called Succeffully");
+
       setShowSpinner(false);
       setShowMod((prevShowMod) => !prevShowMod);
       setLoad((prevLoad) => !prevLoad);
     };
 
     response = await ImgGenerator({ prompt, size, callback: handleImage });
-    console.log(response);
-
-    const data = await response;
 
     setLinkPrompt(prompt);
-    setLink(data.url);
+    setLink(response.orgUrl);
     openModal(true);
     setShowSpinner(false);
-    console.log("Image Prompt :", linkPrompt);
-    console.log("Image Link :", link);
+
+    console.log("Saved Id: ", saveId);
+
+    // console.log("Image Prompt :", linkPrompt);
+    // console.log("Image Link :", link);
   };
 
   return (
@@ -134,6 +136,7 @@ const InputForm = () => {
             load={load}
             link={link}
             userPrompt={linkPrompt}
+            // save_id={saveId}
           />
         )}
       </div>
