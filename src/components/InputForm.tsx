@@ -28,6 +28,10 @@ const InputForm = () => {
   const [linkPrompt, setLinkPrompt] = useState("");
   const [link, setLink] = useState("");
   const [modal, openModal] = useState(false);
+
+  const [imgDate, setImgDate] = useState("");
+  const [imgId, setImgId] = useState("");
+
   const closeModal = () => openModal(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,6 +58,8 @@ const InputForm = () => {
 
     setLinkPrompt(response.prompt);
     setLink(response.url);
+    setImgDate(response.date);
+    setImgId(response.id);
     openModal(true);
     setShowSpinner(false);
   };
@@ -125,6 +131,8 @@ const InputForm = () => {
             // load={load}
             link={link}
             userPrompt={linkPrompt}
+            imgDate={imgDate}
+            imgId={imgId}
           />
         )}
       </div>

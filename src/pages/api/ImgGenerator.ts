@@ -73,7 +73,7 @@ async function ImgGenerator({ prompt, size, callback }: ImgGeneratorProps) {
     id: fetchedImageData._id,
     prompt: fetchedImageData.prompt,
     url: fetchedImageData.original_image_url,
-    date_created: fetchedImageData.date_created,
+    date: fetchedImageData.date_created,
   };
 }
 
