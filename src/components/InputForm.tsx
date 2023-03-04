@@ -22,24 +22,18 @@ const InputForm = () => {
   const [modifiersStyle, setModifiersStyle] = useState("");
   const [showMod, setShowMod] = useState(false);
 
-  const [load, setLoad] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
+  const [showButtonSpinner, setShowButtonSpinner] = useState(false);
 
   const [linkPrompt, setLinkPrompt] = useState("");
   const [link, setLink] = useState("");
-  const [modal, openModal] = useState(false);
-
   const [imgDate, setImgDate] = useState("");
   const [imgId, setImgId] = useState("");
-
-  const closeModal = () => openModal(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setShowMod(false);
-    setLoad(false);
-    setShowSpinner(true);
+    setShowButtonSpinner(true);
 
     const prompt = `${userPrompt} ${imageStyle} ${artistStyle} ${modifiersStyle}`;
 
@@ -48,10 +42,8 @@ const InputForm = () => {
 
     const handleImage = () => {
       console.log("Handle Function Called Succeffully");
-
-      setShowSpinner(false);
+      setShowButtonSpinner(false);
       setShowMod((prevShowMod) => !prevShowMod);
-      setLoad((prevLoad) => !prevLoad);
     };
 
     response = await ImgGenerator({ prompt, size, callback: handleImage });
@@ -60,8 +52,6 @@ const InputForm = () => {
     setLink(response.url);
     setImgDate(response.date);
     setImgId(response.id);
-    openModal(true);
-    setShowSpinner(false);
   };
 
   return (
@@ -122,13 +112,16 @@ const InputForm = () => {
         />
 
         {/* Generate Button  */}
-        <GenerateButton handleSubmit={handleSubmit} showSpinner={showSpinner} />
+        <GenerateButton
+          handleSubmit={handleSubmit}
+          showSpinner={showButtonSpinner}
+        />
       </form>
+
       <div>
         {showMod && (
           <ShowImages
             showMod={showMod}
-            // load={load}
             link={link}
             userPrompt={linkPrompt}
             imgDate={imgDate}

@@ -1,4 +1,4 @@
-import DDHeader from "@/src/components/DDHeader";
+import DDHeader from "@/src/components/formComponents/DDHeader";
 import { SizeSelectorProps as Props } from "@/src/types";
 
 const SizeSelector = ({ value, onChange }: Props) => (

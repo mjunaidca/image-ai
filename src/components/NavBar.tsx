@@ -12,13 +12,13 @@ export default function NavBar() {
           width={32}
           height={32}
         />
-        <h1 className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
+        <text className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
           Image Artist
-        </h1>
+        </text>
       </Link>
-      <h1 className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
+      <text className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
         Logo
-      </h1>
+      </text>
     </header>
   );
 }

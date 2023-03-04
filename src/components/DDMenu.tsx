@@ -1,5 +1,5 @@
 import React from "react";
-import DDHeader from "@/src/components/DDHeader";
+import DDHeader from "@/src/components/formComponents/DDHeader";
 
 import { DropDownMenueProps as Props } from "@/src/types";
 
