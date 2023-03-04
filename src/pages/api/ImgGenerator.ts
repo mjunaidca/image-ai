@@ -4,7 +4,15 @@ interface ImgGeneratorProps {
   callback: () => void;
 }
 
+async function fetchImage(id: string) {
+  const response = await fetch(`/api/aiimg/${id}`);
+  const data = await response.json();
+  return data.customer;
+}
+
 async function ImgGenerator({ prompt, size, callback }: ImgGeneratorProps) {
+  // const [imageData, setImageData] = useState(null);
+
   console.log("Starting Image Generator Function");
 
   console.log("Sending Request to API");
@@ -48,6 +56,11 @@ async function ImgGenerator({ prompt, size, callback }: ImgGeneratorProps) {
   const databaseData = await databaseResponse.json();
 
   // console.log("Received ID from Database", databaseData.insertedId);
+  const id = databaseData.insertedId;
+
+  const fetchedImageData = await fetchImage(id);
+
+  console.log("Fetched Image Data", fetchedImageData);
 
   console.log("Data Saved to Data Base Successfully");
 
@@ -56,7 +69,12 @@ async function ImgGenerator({ prompt, size, callback }: ImgGeneratorProps) {
   callback();
 
   // return data;
-  return { orgUrl: data.url, id: databaseData.insertedId };
+  return {
+    id: fetchedImageData._id,
+    prompt: fetchedImageData.prompt,
+    url: fetchedImageData.original_image_url,
+    date_created: fetchedImageData.date_created,
+  };
 }
 
 export default ImgGenerator;

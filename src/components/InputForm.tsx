@@ -29,7 +29,6 @@ const InputForm = () => {
   const [link, setLink] = useState("");
   const [modal, openModal] = useState(false);
   const closeModal = () => openModal(false);
-  const [saveId, setSaveId] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,15 +52,10 @@ const InputForm = () => {
 
     response = await ImgGenerator({ prompt, size, callback: handleImage });
 
-    setLinkPrompt(prompt);
-    setLink(response.orgUrl);
+    setLinkPrompt(response.prompt);
+    setLink(response.url);
     openModal(true);
     setShowSpinner(false);
-
-    console.log("Saved Id: ", saveId);
-
-    // console.log("Image Prompt :", linkPrompt);
-    // console.log("Image Link :", link);
   };
 
   return (
@@ -125,18 +119,12 @@ const InputForm = () => {
         <GenerateButton handleSubmit={handleSubmit} showSpinner={showSpinner} />
       </form>
       <div>
-        {/* {showSpinner && (
-          <div className="overlay">
-            <div className="spinner" />
-          </div>
-        )} */}
         {showMod && (
           <ShowImages
             showMod={showMod}
-            load={load}
+            // load={load}
             link={link}
             userPrompt={linkPrompt}
-            // save_id={saveId}
           />
         )}
       </div>

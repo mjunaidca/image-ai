@@ -1,63 +1,19 @@
-import useSWR from "swr";
 import ImgModal from "@/src/components/ImgModal";
-import React, { useState, useEffect } from "react";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import React, { useState } from "react";
 
 interface Props {
   showMod: boolean;
-  load: boolean;
   link?: string;
   userPrompt?: string;
-  save_id?: string;
 }
 
-const ShowImages = ({ showMod, load, link, userPrompt, save_id }: Props) => {
-  console.log("Called the ShowImages Component");
-
-  const [loading, setLoading] = useState(load);
-  const [image, setImage] = useState("");
-  const [prompt, setPrompt] = useState("");
+const ShowImages = ({ showMod, link, userPrompt }: Props) => {
+  const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState(link || "");
+  const [prompt, setPrompt] = useState(userPrompt || "");
   const [showModal, setShowModal] = useState(showMod);
 
-  const { data, error } = useSWR(`api/aiimg`, fetcher);
-
-  useEffect(() => {
-    if (link && userPrompt) {
-      setImage(link);
-      setPrompt(userPrompt);
-      setLoading(false);
-      setShowModal(true);
-      console.log("redndering image from direct link");
-      console.log("Fetched Data", data);
-    } else if (data) {
-      const imageDataArr = [...data.imagedb];
-      const inverseOrder = imageDataArr.reverse();
-
-      const url = inverseOrder[0].original_image_url;
-      const userPrompt = inverseOrder[0].prompt;
-
-      setImage(url);
-      setPrompt(userPrompt);
-
-      setLoading(false);
-      setShowModal(true);
-      console.log("Link: ", link);
-      console.log("User Prompt: ", userPrompt);
-
-      console.log("rendering image by fetching data");
-    }
-  }, [data, link, userPrompt]);
-
-  if (error) return <div>Failed to load</div>;
-  if (!data && !link && !userPrompt) return <div>Loading...</div>;
-
   const closeModal = () => setShowModal(false);
-
-  let arr: string[] = [image, prompt];
-
-  // console.log("Image URL: ", image);
-  // console.log("Prompt: ", prompt);
 
   return (
     <div>

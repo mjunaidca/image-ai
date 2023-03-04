@@ -8,12 +8,15 @@ export default function ImgModal({
   onClose,
   userPrompt,
 }: Props) {
+  const [loading, setLoading] = useState(true);
   let image = statusImage;
-
-  console.log("Image URL: ", image);
 
   const handleDownload = () => {
     window.open(image, "_blank");
+  };
+
+  const handleImageLoad = () => {
+    setLoading(false);
   };
 
   return (
@@ -51,15 +54,19 @@ export default function ImgModal({
                     Your Latest Image
                   </Dialog.Title>
                   <div className="mt-2">
-                    {image && (
+                    {loading ? (
+                      <div className="flex items-center justify-center h-40">
+                        <p className="text-gray-500 font-medium">Loading...</p>
+                      </div>
+                    ) : (
                       <div className="relative">
                         <img
                           src={image}
                           alt="Your Image"
                           className="w-full h-auto"
+                          onLoad={handleImageLoad}
                         />
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                          {/* <p className="text-3xl text-white font-bold">Your Text Here</p> */}
                           <img
                             src={"/mark.png"}
                             alt="Your Image"
